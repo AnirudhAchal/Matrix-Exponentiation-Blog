@@ -11,6 +11,7 @@
  - DP
  - Matrix Exponentiation
  - Competitive Programming
+ - Algorithms
  categories:
  - Compsoc
  github_username: 'AnirudhAchal'
