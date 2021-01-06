@@ -163,10 +163,10 @@ def get_fibonacci_matrix_exp(n):
     if n == 1: return 0
  
     F2 = [[1],
-		  [0]]
+          [0]]
  
     P = [[1, 1],
-		 [1, 0]]
+         [1, 0]]
  
     Pn_2 = matrix_power(P, n - 2) # Calculating P^(n-2)
     Fn = matrix_multiply(Pn_2, F2) # Fn = P^(n-2) * F2
