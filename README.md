@@ -60,7 +60,7 @@ F<sub>4</sub> = P<sup>3</sup> * F<sub>1</sub>
 .\
 .
 
-Fn = P^(n - 1) * F1
+Fn = P<sub>n - 1</sub> * F<sub>1</sub>
 
 This is a very helpful relation. We have got the nth term of the series in terms of the base matrix F<sub>1</sub>. <b>Note:</b> This base matrix need not always be n = 1. 
 
@@ -131,11 +131,102 @@ Now let us get back to the original question. That is calculating the nth fibona
 We consider F<sub>n</sub> to be:
 
 ```
-|  fn  | 
-| fn_1 |
+Fn = |  fn  | 
+     | fn_1 |
+
 where fn is the nth fibonacci number and fn_1 is the (n-1)th fibonacci number.
 ```
 
-# Matrix-Exponentiation-Blog
-Matrix Exponentiation Blog for IEEE
+Now we need to find P such that 
+F<sub>n</sub> = P * F<sub>n - 1</sub> \
+Using f<sub>n</sub> = f<sub>n - 1</sub> + f<sub>n - 2</sub> and f<sub>n - 1</sub> = f<sub>n - 1</sub>, with the help of basic linear algebra we see that:
 
+```
+P = |1 1|
+    |1 0|
+```
+
+We will consider the base matrix to be:
+
+```
+F2 = |f2| = |1|
+     |f1|   |0|
+
+The base matrix is Fn when n == 2.
+```
+
+Now we can easily see F<sub>n</sub> = P<sup>(n - 2)</sup> * F<sub>2</sub>. As shown early P<sup>(n - 2)</sup> can be calculated in O(log(n) * m^3). Here m = 2. Therefore the time complexity of this solution is O(log(n) * 2<sup>3</sup>) which is O(log(n)). The code for this is given below.
+
+``` python
+def get_fibonacci_matrix_exp(n):
+    if n <= 0: return -1 # Throw error
+    if n == 1: return 0
+ 
+    F2 = [[1],
+		  [0]]
+ 
+    P = [[1, 1],
+		 [1, 0]]
+ 
+    Pn_2 = matrix_power(P, n - 2) # Calculating P^(n-2)
+    Fn = matrix_multiply(Pn_2, F2) # Fn = P^(n-2) * F2
+
+    return Fn[0][0] 
+
+```
+
+This is much more efficient solution and scales much better for very large values of n.
+
+Now using this, try to solve the following problem in logarithmic time.
+
+<b>Q. Given a 3 x N rectangle, determine how many ways can we tile the rectangle using 1 x 3 and 3 x 1 tiles. </b>
+
+Like before, first we will come up with a O(n) solution and obtain a linear recurrence relation. In this problem dp<sub>n</sub> = dp<sub>n - 1</sub> + dp<sub>n - 3</sub>. If it is unclear how we obtain this, I suggest you read [this](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/) article. Like before we need to express this relation as DP<sub>n</sub> = P * DP<sub>n - 1</sub> , where P, DP<sub>n</sub> and DP<sub>n - 1</sub> are all matrices.
+Here we take DP<sub>n</sub>, P and base matrix DP<sub>3</sub> (n == 3) as:
+```
+DPn = | dpn |
+      |dpn_1|
+      |dpn_2|
+where dpn is the answer when for when N = n.
+
+P = |1 0 1|
+    |1 0 0|
+    |0 1 0|
+
+DP3 = |2|
+      |0|
+      |0|
+```
+
+It is easy to see that, DP<sub>n</sub> = P<sup>n -3</sup> * DP<sub>3</sub>. As shown before, this can now be solved in O(log(n) * m<sup>3</sup>) where m is now 3. The code for this is given below.
+
+``` python
+def get_tiling_count(n):
+    if n <= 0: return -1 # Throw error : Invalid value of n
+    if n == 1: return 0
+    if n == 2: return 0
+ 
+    DP3 = [[2],
+           [0],
+           [0]]
+ 
+    P = [[1, 0, 1],
+         [1, 0, 0],
+         [0, 1, 0]]
+ 
+    Pn_3 = matrix_power(P, n - 3) # Calculating P^(n-3)
+    DPn = matrix_multiply(Pn_3, DP3) # DPn = P^(n-3) * DP3
+
+    return DPn[0][0] 
+
+```
+
+Here are some other problems that you can try solving to practice this concept.
+
+ - [Tiling 4x4](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/)
+ - [Tetrahedron](https://codeforces.com/problemset/problem/166/E)
+
+ ### References
+ - https://codeforces.com/blog/entry/67776
+ - https://www.youtube.com/watch?v=eMXNWcbw75E
+ 
