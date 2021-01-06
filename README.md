@@ -4,7 +4,7 @@
  author_github: AnirudhAchal
  date: 2021-01-06 18:31:23
  image: '/assets/img/'
- description: 'Introductory post to Matrix Exponentiation'
+ description: 'Introductory blog to Matrix Exponentiation'
  tags:
  - IEEE NITK
  - CompSoc
@@ -44,7 +44,7 @@ def get_fibonacci(n):
 This solution is an iterative dp that runs in linear time ie. O(n). Note that this solution has a space complexity of O(n), but it can be easily converted into O(1) space. 
 
 
-Now at first there does not seem to be any straightforward way to improve the time complexity of this solution. This is where matrix exponentiation comes into the picture. Our goal is to obtain a recurrence relation of the form F<sub>n</sub> = P * F<sub>n - 1</sub>  where P is a constant matrix and F<sub>n</sub> and F<sub>n - 1</sub> are respectively matrices.  Let us see what happens if we obtain such a relation. 
+Now at first there does not seem to be any straightforward way to improve the time complexity of this solution. This is where matrix exponentiation comes into the picture. Our goal is to obtain a recurrence relation of the form F<sub>n</sub> = P * F<sub>n - 1</sub>  where P is a constant matrix and F<sub>n</sub> and F<sub>n - 1</sub> are matrices.  Let us see what happens if we obtain such a relation. 
 
 F<sub>2</sub> = P * F<sub>1</sub> 
 
@@ -82,13 +82,13 @@ def power(x, n):
     return result			
 ```
 
-A very similar function can be implemented to calculate P<sup>n</sup> in O(log(n) * m<sup>3</sup>) time where P is a square matrix and n is an integer and m is the dimension of P (ie. P is an m x m matrix).  
+A very similar function can be implemented to calculate P<sup>n</sup> in O(log(n) * m<sup>3</sup>) time where P is a square matrix, n is an integer and m is the dimension of P (ie. P is an m x m matrix).  
 
 ``` python
 def matrix_power(P, n):
     m = len(P) 
 
-    # Initializing identity m x m matrix
+    # Initializing m x m identity matrix
     R = [[1 if i == j else 0 for i in range(m)] for j in range(m)] 
 
     while n > 0:
@@ -101,7 +101,7 @@ def matrix_power(P, n):
 
     return R
 
- 
+
 def matrix_multiply(A, B):
 
     n = len(A)
@@ -126,7 +126,7 @@ def matrix_multiply(A, B):
 
 'matrix_multiply' is a function that runs in O(n<sup>3</sup>). Considering that, the overall time complexity of calculating P<sup>n</sup> is O(log(n) * m<sup>3</sup>).
 
-Now let us get back to the original question. That is calculating the nth fibonacci number. What we need to do is to get the matrices F<sub>n</sub> and P. 
+Now let us get back to the original question. That is, calculating the nth fibonacci number. What we need to do is to get the matrices F<sub>n</sub> and P. 
 
 We consider F<sub>n</sub> to be:
 
@@ -139,7 +139,7 @@ where fn is the nth fibonacci number and fn_1 is the (n-1)th fibonacci number.
 
 Now we need to find P such that 
 F<sub>n</sub> = P * F<sub>n - 1</sub> \
-Using f<sub>n</sub> = f<sub>n - 1</sub> + f<sub>n - 2</sub> and f<sub>n - 1</sub> = f<sub>n - 1</sub>, with the help of basic linear algebra we see that:
+Using f<sub>n</sub> = f<sub>n - 1</sub> + f<sub>n - 2</sub> and f<sub>n - 1</sub> = f<sub>n - 1</sub> and with the help of basic linear algebra we see that:
 
 ```
 P = |1 1|
@@ -155,7 +155,7 @@ F2 = |f2| = |1|
 The base matrix is Fn when n == 2.
 ```
 
-Now we can easily see F<sub>n</sub> = P<sup>(n - 2)</sup> * F<sub>2</sub>. As shown early P<sup>(n - 2)</sup> can be calculated in O(log(n) * m<sup>3</sup>). Here m = 2. Therefore the time complexity of this solution is O(log(n) * 2<sup>3</sup>) which is O(log(n)). The code for this is given below.
+Now we can easily see F<sub>n</sub> = P<sup>n - 2</sup> * F<sub>2</sub>. As shown early P<sup>n - 2</sup> can be calculated in O(log(n) * m<sup>3</sup>). Here m = 2. Therefore the time complexity of this solution is O(log(n) * 2<sup>3</sup>) which is O(log(n)). The code for this is given below.
 
 ``` python
 def get_fibonacci_matrix_exp(n):
@@ -181,7 +181,7 @@ Now using this, try to solve the following problem in logarithmic time.
 
 <b>Q. Given a 3 x N rectangle, determine how many ways can we tile the rectangle using 1 x 3 and 3 x 1 tiles. </b>
 
-Like before, first we will come up with a O(n) solution and obtain a linear recurrence relation. In this problem dp<sub>n</sub> = dp<sub>n - 1</sub> + dp<sub>n - 3</sub>. If it is unclear how we obtain this, I suggest you read [this](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/) article. Like before, we need to express this relation as DP<sub>n</sub> = P * DP<sub>n - 1</sub> , where P, DP<sub>n</sub> and DP<sub>n - 1</sub> are all matrices.
+Like before, first we will come up with a O(n) solution and obtain a linear recurrence relation. In this problem dp<sub>n</sub> = dp<sub>n - 1</sub> + dp<sub>n - 3</sub>. If it is unclear how we obtain this, I suggest you read [this](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/) article. We need to express this relation as DP<sub>n</sub> = P * DP<sub>n - 1</sub> , where P, DP<sub>n</sub> and DP<sub>n - 1</sub> are all matrices.
 Here we take DP<sub>n</sub>, P and base matrix DP<sub>3</sub> (n == 3) as:
 ```
 DPn = | dpn |
