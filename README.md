@@ -155,7 +155,7 @@ F2 = |f2| = |1|
 The base matrix is Fn when n == 2.
 ```
 
-Now we can easily see F<sub>n</sub> = P<sup>(n - 2)</sup> * F<sub>2</sub>. As shown early P<sup>(n - 2)</sup> can be calculated in O(log(n) * m^3). Here m = 2. Therefore the time complexity of this solution is O(log(n) * 2<sup>3</sup>) which is O(log(n)). The code for this is given below.
+Now we can easily see F<sub>n</sub> = P<sup>(n - 2)</sup> * F<sub>2</sub>. As shown early P<sup>(n - 2)</sup> can be calculated in O(log(n) * m<sup>3</sup>). Here m = 2. Therefore the time complexity of this solution is O(log(n) * 2<sup>3</sup>) which is O(log(n)). The code for this is given below.
 
 ``` python
 def get_fibonacci_matrix_exp(n):
