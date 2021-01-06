@@ -2,7 +2,7 @@
  layout: post
  title: "An introduction to Matrix Exponentiation"
  author_github: AnirudhAchal
- date: 2021-01-06
+ date: 2021-01-06 18:31:23
  image: '/assets/img/'
  description: 'Introductory post to Matrix Exponentiation'
  tags:
@@ -60,7 +60,7 @@ F<sub>4</sub> = P<sup>3</sup> * F<sub>1</sub>
 .\
 .
 
-Fn = P<sub>n - 1</sub> * F<sub>1</sub>
+Fn = P<sup>n - 1</sup> * F<sub>1</sub>
 
 This is a very helpful relation. We have got the nth term of the series in terms of the base matrix F<sub>1</sub>. <b>Note:</b> This base matrix need not always be n = 1. 
 
@@ -181,7 +181,7 @@ Now using this, try to solve the following problem in logarithmic time.
 
 <b>Q. Given a 3 x N rectangle, determine how many ways can we tile the rectangle using 1 x 3 and 3 x 1 tiles. </b>
 
-Like before, first we will come up with a O(n) solution and obtain a linear recurrence relation. In this problem dp<sub>n</sub> = dp<sub>n - 1</sub> + dp<sub>n - 3</sub>. If it is unclear how we obtain this, I suggest you read [this](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/) article. Like before we need to express this relation as DP<sub>n</sub> = P * DP<sub>n - 1</sub> , where P, DP<sub>n</sub> and DP<sub>n - 1</sub> are all matrices.
+Like before, first we will come up with a O(n) solution and obtain a linear recurrence relation. In this problem dp<sub>n</sub> = dp<sub>n - 1</sub> + dp<sub>n - 3</sub>. If it is unclear how we obtain this, I suggest you read [this](https://www.geeksforgeeks.org/count-number-of-ways-to-fill-a-n-x-4-grid-using-1-x-4-tiles/) article. Like before, we need to express this relation as DP<sub>n</sub> = P * DP<sub>n - 1</sub> , where P, DP<sub>n</sub> and DP<sub>n - 1</sub> are all matrices.
 Here we take DP<sub>n</sub>, P and base matrix DP<sub>3</sub> (n == 3) as:
 ```
 DPn = | dpn |
