@@ -1,6 +1,6 @@
 ---
  layout: post
- title: "An introduction to Matrix Exponentiation"
+ title: "An Introduction to Matrix Exponentiation"
  author_github: AnirudhAchal
  date: 2021-01-06 18:31:23
  image: '/assets/img/'
